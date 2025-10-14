@@ -1,11 +1,19 @@
 ﻿namespace ConsoleBasic
 {
+    enum books
+    {
+        booka,
+        bookb,
+        bookc,
+        bookd
+    }
     internal class Program
     {
         static void Main(string[] args)
         {
+            Program p = new Program();
             //调用Calculate方法
-            int resutl = Calculate(0, 100);
+            int resutl = p.Calculate(0, 100);
             Console.WriteLine(resutl);
             //调用BitCalculate方法
             BitCalculate(1, 2);
@@ -22,11 +30,9 @@
                 arr[i] <<= 2; //左移两位
                 Console.WriteLine(arr[i]);
             }
-
-             
         }
         //接受两个整数参数a和b，计算从a到b之间所有能被3整除的数的和
-        static int Calculate(int a, int b)
+        int Calculate(int a, int b)
         {
             int result = 0;
             for (int i = a; i <= b; i++)
