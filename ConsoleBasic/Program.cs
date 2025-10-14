@@ -1,6 +1,7 @@
 ﻿namespace ConsoleBasic
 {
-    enum books
+    //枚举类型
+    enum Books
     {
         booka,
         bookb,
