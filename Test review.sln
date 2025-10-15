@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RectangleApplication", "Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleInterface", "ConsoleInterface\ConsoleInterface.csproj", "{1581582D-BC0F-4F3E-869B-1271354C4D63}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleDelegates", "ConsoleDelegates\ConsoleDelegates.csproj", "{1285D566-97E3-4D09-84E6-46D69EB67775}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1581582D-BC0F-4F3E-869B-1271354C4D63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1581582D-BC0F-4F3E-869B-1271354C4D63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1581582D-BC0F-4F3E-869B-1271354C4D63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1285D566-97E3-4D09-84E6-46D69EB67775}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1285D566-97E3-4D09-84E6-46D69EB67775}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1285D566-97E3-4D09-84E6-46D69EB67775}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1285D566-97E3-4D09-84E6-46D69EB67775}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
