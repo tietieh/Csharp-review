@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleThread", "ConsoleThr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleSumThread", "ConsoleSumThread\ConsoleSumThread.csproj", "{75FE22CC-2268-4272-95D8-0BC1AB3AB387}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAirTicketBooking", "ConsoleAirTicketBooking\ConsoleAirTicketBooking.csproj", "{9EC4523F-7516-4207-9EDC-4556B13BEB8B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{75FE22CC-2268-4272-95D8-0BC1AB3AB387}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75FE22CC-2268-4272-95D8-0BC1AB3AB387}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75FE22CC-2268-4272-95D8-0BC1AB3AB387}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EC4523F-7516-4207-9EDC-4556B13BEB8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EC4523F-7516-4207-9EDC-4556B13BEB8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EC4523F-7516-4207-9EDC-4556B13BEB8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EC4523F-7516-4207-9EDC-4556B13BEB8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
