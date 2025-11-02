@@ -9,6 +9,8 @@
             //OfTypeTest();
             //OrderByTest();
             //MultiOrderByTest();
+            //GroupByTest();
+            //ToLookUpTest();
         }
         //Where测试
         static void WhereTest()
@@ -118,6 +120,61 @@
             }
             //使用OrderBy查询(方法语法)
             studentList.OrderBy(s => s.StudentName).ThenBy(s => s.Age).ToList().ForEach(s => Console.WriteLine(s.StudentName + " " + s.Age));
+        }
+        //GroupBy测试
+        static void GroupByTest()
+        {
+            //创建学生列表
+            IList<Student> studentList = new List<Student>() {
+                new Student() { StudentID = 1, StudentName = "John", Age = 18 } ,
+                new Student() { StudentID = 2, StudentName = "Steve",  Age = 25 } ,
+                new Student() { StudentID = 3, StudentName = "Bill",  Age = 25 } ,
+                new Student() { StudentID = 4, StudentName = "Ram" , Age = 18 } ,
+                new Student() { StudentID = 5, StudentName = "Ron" , Age = 19 }
+            };
+            //使用GroupBy查询(查询表达式语法)
+            var groupByResult = from s in studentList
+                                group s by s.Age;
+            foreach (var g in groupByResult)
+            {
+                Console.WriteLine("Age: " + g.Key);
+                foreach (var s in g)
+                {
+                    Console.WriteLine("Name: " + s.StudentName);
+                }
+            }
+            //使用GroupBy查询(方法语法)
+            var groupByResult2 = studentList.GroupBy(s => s.Age);
+            foreach (var g in groupByResult2)
+            {
+                Console.WriteLine("Age: " + g.Key);
+                foreach (var s in g)
+                {
+                    Console.WriteLine("Name: " + s.StudentName);
+                }
+            }
+        }
+        //ToLookUp测试
+        static void ToLookUpTest()
+        {
+            //创建学生列表
+            IList<Student> studentList = new List<Student>() {
+                new Student() { StudentID = 1, StudentName = "John", Age = 18 } ,
+                new Student() { StudentID = 2, StudentName = "Steve",  Age = 25 } ,
+                new Student() { StudentID = 3, StudentName = "Bill",  Age = 25 } ,
+                new Student() { StudentID = 4, StudentName = "Ram" , Age = 18 } ,
+                new Student() { StudentID = 5, StudentName = "Ron" , Age = 19 }
+            };
+            //使用ToLookUp查询(方法语句)
+            var lookUpResult = studentList.ToLookup(s => s.Age);
+            foreach (var g in lookUpResult)
+            {
+                Console.WriteLine("Age: " + g.Key);
+                foreach (var s in g)
+                {
+                    Console.WriteLine("Name: " + s.StudentName);
+                }
+            }
         }
     }
     //Student类
