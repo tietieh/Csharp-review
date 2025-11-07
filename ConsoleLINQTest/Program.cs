@@ -11,6 +11,9 @@
             //MultiOrderByTest();
             //GroupByTest();
             //ToLookUpTest();
+            //JoinTest();
+            //JoinTest2();
+            GroupJoinTest();
         }
         //Where测试
         static void WhereTest()
@@ -176,12 +179,107 @@
                 }
             }
         }
+        //Join测试
+        static void JoinTest()
+        {
+            IList<string> strList1 = new List<string>()
+            {
+                "One",
+                "Two",
+                "Three",
+                "Four"
+            };
+
+            IList<string> strList2 = new List<string>()
+            {
+                "One",
+                "Two1",
+                "Three1",
+                "Four1"
+            };
+
+            var innerJoin = strList1.Join(strList2,
+                                  str1 => str1,
+                                  str2 => str2,
+                                  (str1, str2) => str1);
+            foreach (var item in innerJoin)
+            {
+                Console.WriteLine(item);
+            }
+        }
+        //Join测试2
+        static void JoinTest2()
+        {
+            List<Student> studentList = new List<Student>()
+            {
+                new Student() { StudentID = 1, StudentName = "John", Age = 18 } ,
+                new Student() { StudentID = 2, StudentName = "Steve",  Age = 25 } ,
+                new Student() { StudentID = 3, StudentName = "Bill",  Age = 25 } ,
+                new Student() { StudentID = 4, StudentName = "Ram" , Age = 18 } ,
+                new Student() { StudentID = 5, StudentName = "Ron" , Age = 19 }
+            };
+
+            List<Standard> standardList = new List<Standard>()
+            {
+                new Standard() { StandardID = 1, StandardName = "Mathematics" },
+                new Standard() { StandardID = 2, StandardName = "Science" },
+                new Standard() { StandardID = 3, StandardName = "English" },
+                new Standard() { StandardID = 4, StandardName = "Social Studies" }
+            };
+
+            var joinResult = studentList.Join(standardList,
+                                s1 => s1.StudentID,
+                                s2 => s2.StandardID,
+                                (s1, s2) => new { StudentName = s1.StudentName,StandardName = s2.StandardName });
+            foreach (var item in joinResult)
+            {
+                Console.WriteLine(item.StudentName + " " + item.StandardName);
+            }
+        }
+        //GroupJoin测试
+        static void GroupJoinTest()
+        {
+            List<Student> studentList = new List<Student>()
+            {
+                new Student() { StudentID = 1, StudentName = "John", Age = 18 } ,
+                new Student() { StudentID = 2, StudentName = "Steve",  Age = 25 } ,
+                new Student() { StudentID = 3, StudentName = "Bill",  Age = 25 } ,
+                new Student() { StudentID = 4, StudentName = "Ram" , Age = 18 } ,
+                new Student() { StudentID = 5, StudentName = "Ron" , Age = 19 }
+            }; 
+
+            List<Standard> standardList = new List<Standard>()
+            {
+                new Standard() { StandardID = 1, StandardName = "Mathematics" },
+                new Standard() { StandardID = 2, StandardName = "Science" },
+                new Standard() { StandardID = 3, StandardName = "English" },
+                new Standard() { StandardID = 4, StandardName = "Social Studies" }
+            };
+
+            var groupJoinResult = standardList.GroupJoin(studentList,
+                                s1 => s1.StandardID,
+                                s2 => s2.StudentID,
+                                (s1, s2) => new { StandardName = s1.StandardName, Students = s2 });
+            foreach (var item in groupJoinResult)
+            {
+                Console.WriteLine(item.StandardName);
+                foreach (var standard in item.Students)
+                {
+                    Console.WriteLine(standard.StudentName);
+                }
+            }
+        }
     }
     //Student类
-    internal class Student
+    public class Student
     {
         public int StudentID { get; set; }
         public string StudentName { get; set; }
         public int Age { get; set; }
+    }
+    public class Standard
+    {
+        public int StandardID { get; set; }
+        public string StandardName { get; set; }
     }
 }
