@@ -17,7 +17,8 @@
             //SelectTest();
             //SelectManyTest();
             //LimitTest();
-            ContainsTest();
+            //ContainsTest();
+            Aggregate();
         }
         //Where测试
         static void WhereTest()
@@ -328,7 +329,6 @@
             Console.WriteLine(students.Any(s => s.Age >= 20));
         }
         //Contains
-
         static void ContainsTest()
         {
             List<int> numbers = new List<int>() { 1, 2, 3, 4, 5 };
@@ -346,6 +346,36 @@
             Student stu = new Student() { StudentID = 1, StudentName = "John", Age = 18 };
 
             Console.WriteLine(students.Contains(stu, new StudentComparer()));
+        }
+        //Aggregate测试
+        static void Aggregate()
+        {
+            List<int> numbers = new List<int>() { 1, 2, 3, 4, 5 };
+            //使用Aggregate查询
+            var result = numbers.Aggregate((x, y) => x + y);
+            Console.WriteLine(result);
+            List<string> numbers2 = new List<string>() { "1", "2", "3", "4", "5" };
+            var result2 = numbers2.Aggregate((x, y) => x +"," + y);
+            Console.WriteLine(result2);
+            //学生集合
+            IList<Student> students = new List<Student>()
+            {
+                new Student() { StudentID = 1, StudentName = "John", Age = 18 } ,
+                new Student() { StudentID = 2, StudentName = "Steve",  Age = 25 } ,
+                new Student() { StudentID = 3, StudentName = "Bill",  Age = 25 } ,
+                new Student() { StudentID = 4, StudentName = "Ram" , Age = 18 } ,
+                new Student() { StudentID = 5, StudentName = "Ron" , Age = 19 }
+            };
+            //使用Aggregate查询
+            var result3 = students.Aggregate<Student,string>(
+                 "StudentName: ",
+                 (str, student) => str += student.StudentName + ", ");
+            Console.WriteLine(result3);
+            var result4 = students.Aggregate<Student, string,string>(
+                 "StudentName: ",
+                 (str, student) => str += student.StudentName + ", ",
+                 str => str.TrimEnd(',',' '));
+            Console.WriteLine(result4);
         }
     }
     //需要一个继承IEqualityComparer接口的类，重写Equals方法和GetHashCode方法
