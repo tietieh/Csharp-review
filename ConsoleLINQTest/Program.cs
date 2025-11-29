@@ -13,7 +13,11 @@
             //ToLookUpTest();
             //JoinTest();
             //JoinTest2();
-            GroupJoinTest();
+            //GroupJoinTest();
+            //SelectTest();
+            //SelectManyTest();
+            //LimitTest();
+            ContainsTest();
         }
         //Where测试
         static void WhereTest()
@@ -230,7 +234,7 @@
             var joinResult = studentList.Join(standardList,
                                 s1 => s1.StudentID,
                                 s2 => s2.StandardID,
-                                (s1, s2) => new { StudentName = s1.StudentName,StandardName = s2.StandardName });
+                                (s1, s2) => new { StudentName = s1.StudentName, StandardName = s2.StandardName });
             foreach (var item in joinResult)
             {
                 Console.WriteLine(item.StudentName + " " + item.StandardName);
@@ -246,7 +250,7 @@
                 new Student() { StudentID = 3, StudentName = "Bill",  Age = 25 } ,
                 new Student() { StudentID = 4, StudentName = "Ram" , Age = 18 } ,
                 new Student() { StudentID = 5, StudentName = "Ron" , Age = 19 }
-            }; 
+            };
 
             List<Standard> standardList = new List<Standard>()
             {
@@ -268,6 +272,96 @@
                     Console.WriteLine(standard.StudentName);
                 }
             }
+        }
+        //Select测试
+        static void SelectTest()
+        {
+            List<int> numbers = new List<int>() { 1, 2, 3, 4, 5 };
+            //使用Select查询(查询表达式语法)
+            var result = from num in numbers
+                         select num * 2;
+            foreach (var num in result)
+            {
+                Console.WriteLine(num);
+            }
+            //使用Select查询(方法语法)
+            var result1 = numbers.Select(x => x * 2);
+            foreach (var num in result1)
+            {
+                Console.WriteLine(num);
+            }
+        }
+        //SelectMany测试
+        static void SelectManyTest()
+        {
+            List<int> numbers = new List<int>() { 1, 2, 3, 4, 5 };
+            List<int> numbers2 = new List<int>() { 10, 20, 30, 40, 50 };
+            //使用SelectMany查询(查询表达式语法)
+            var result = from num in numbers
+                         from num2 in numbers2
+                         select num * num2;
+            foreach (var num in result)
+            {
+                Console.WriteLine(num);
+            }
+            //使用SelectMany查询(方法语法)
+            var result1 = numbers.SelectMany(x => numbers2, (x, y) => x * y);
+            foreach (var num in result1)
+            {
+                Console.WriteLine(num);
+            }
+        }
+        //限定运算符测试
+        static void LimitTest()
+        {
+            Student[] students = new Student[]
+            {
+                new Student() { StudentID = 1, StudentName = "John", Age = 18 } ,
+                new Student() { StudentID = 2, StudentName = "Steve",  Age = 25 } ,
+                new Student() { StudentID = 3, StudentName = "Bill",  Age = 25 } ,
+                new Student() { StudentID = 4, StudentName = "Ram" , Age = 18 } ,
+                new Student() { StudentID = 5, StudentName = "Ron" , Age = 19 }
+            };
+            //All
+            Console.WriteLine(students.All(s => s.Age >= 18));
+            //Any
+            Console.WriteLine(students.Any(s => s.Age >= 20));
+        }
+        //Contains
+
+        static void ContainsTest()
+        {
+            List<int> numbers = new List<int>() { 1, 2, 3, 4, 5 };
+            Console.WriteLine(numbers.Contains(3));
+
+            //对引用类型判断
+            List<Student> students = new List<Student>()
+            {
+                new Student() { StudentID = 1, StudentName = "John", Age = 18 } ,
+                new Student() { StudentID = 2, StudentName = "Steve",  Age = 25 } ,
+                new Student() { StudentID = 3, StudentName = "Bill",  Age = 25 } ,
+                new Student() { StudentID = 4, StudentName = "Ram" , Age = 18 } ,
+                new Student() { StudentID = 5, StudentName = "Ron" , Age = 19 }
+            };
+            Student stu = new Student() { StudentID = 1, StudentName = "John", Age = 18 };
+
+            Console.WriteLine(students.Contains(stu, new StudentComparer()));
+        }
+    }
+    //需要一个继承IEqualityComparer接口的类，重写Equals方法和GetHashCode方法
+    class StudentComparer : IEqualityComparer<Student>
+    {
+        public bool Equals(Student x, Student y)
+        {
+            if (x.Age == y.Age && x.StudentName == y.StudentName)
+            {
+                return true;
+            }
+            return false;
+        }
+        public int GetHashCode(Student obj)
+        {
+            return obj.Age.GetHashCode() ^ obj.StudentName.GetHashCode();
         }
     }
     //Student类
