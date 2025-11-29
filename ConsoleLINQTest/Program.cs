@@ -18,7 +18,8 @@
             //SelectManyTest();
             //LimitTest();
             //ContainsTest();
-            Aggregate();
+            //Aggregate();
+            JuHeTest();
         }
         //Where测试
         static void WhereTest()
@@ -374,8 +375,52 @@
             var result4 = students.Aggregate<Student, string,string>(
                  "StudentName: ",
                  (str, student) => str += student.StudentName + ", ",
-                 str => str.TrimEnd(',',' '));
+                 str => str.TrimEnd(',',' '));//从字符串中删除匹配项
             Console.WriteLine(result4);
+        }
+        //聚合运算符
+        static void JuHeTest()
+        {
+            List<int> numbers = new List<int>() { 1, 2, 3, 4, 5 };
+            //使用Average查询
+            var result = numbers.Average();
+            Console.WriteLine(result);
+            //学生集合
+            IList<Student> students = new List<Student>()
+            {
+                new Student() { StudentID = 1, StudentName = "John", Age = 18 } ,
+                new Student() { StudentID = 2, StudentName = "Steve",  Age = 25 } ,
+                new Student() { StudentID = 3, StudentName = "Bill",  Age = 25 } ,
+                new Student() { StudentID = 4, StudentName = "Ram" , Age = 18 } ,
+                new Student() { StudentID = 5, StudentName = "Ron" , Age = 19 }
+            };
+            //使用Average查询
+            var result2 = students.Average(s => s.Age);
+            Console.WriteLine(result2);
+            //使用Count查询
+            var result3 = students.Count();
+            Console.WriteLine("学生人数：" + result3);
+            var result4 = students.Count(s => s.Age >= 19);
+            Console.WriteLine("大于19岁的学生人数：" + result4);
+            var result5 = (from s in students
+                           where s.Age >= 19
+                           select s.Age).Count();
+            Console.WriteLine("大于19岁的学生人数：" + result5);
+            //使用Max查询
+            var result6 = numbers.Max(i => { if(i % 2 == 0) return i; return 0; });
+            Console.WriteLine(result6);
+            var result7 = students.Max(s => s.Age);
+            Console.WriteLine(result7);
+            //使用Min查询
+            var result8 = numbers.Min(i => { if(i % 2 == 0) return i; return 3; });
+            Console.WriteLine(result8);
+            var result9 = students.Min(s => s.Age);
+            Console.WriteLine(result9);
+            //使用Sum查询
+            var result10 = numbers.Sum();
+            Console.WriteLine(result10);
+            var result11 = students.Sum(s => { if(s.Age >= 19) return 1; return 0; });
+            Console.WriteLine(result11);
         }
     }
     //需要一个继承IEqualityComparer接口的类，重写Equals方法和GetHashCode方法
