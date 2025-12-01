@@ -19,7 +19,9 @@
             //LimitTest();
             //ContainsTest();
             //Aggregate();
-            JuHeTest();
+            //JuHeTest();
+            //ElementTest();
+            FirstTest();
         }
         //Where测试
         static void WhereTest()
@@ -421,6 +423,35 @@
             Console.WriteLine(result10);
             var result11 = students.Sum(s => { if(s.Age >= 19) return 1; return 0; });
             Console.WriteLine(result11);
+        }
+        //元素运算符
+        static void ElementTest()
+        {
+            List<int> numbers = new List<int>() { 1, 2, 3, 4, 5 };
+            List<string> strings = new List<string>() { "one", "two", "three", "four", "five" };
+            //使用ElementAt查询
+            Console.WriteLine("第一个元素：" + numbers.ElementAt(0));
+            //使用ElementAtOrDefault查询
+            Console.WriteLine("第一个元素：" + strings.ElementAtOrDefault(0));
+            Console.WriteLine("第二个元素：" + numbers.ElementAt(1));
+            Console.WriteLine("第二个元素：" + strings.ElementAtOrDefault(1));
+            //超限
+            Console.WriteLine("第11个元素：" + strings.ElementAt(10));
+            Console.WriteLine("第11个元素：" + strings.ElementAtOrDefault(10));
+        }
+        static void FirstTest()
+        {
+            List<int> numbers = new List<int>() { 1, 2, 3, 4, 5 };
+            List<string> strings = new List<string>() { "one", "two", "three", "four", "five" };
+            List<int> emptyNumbers = new List<int>();
+            //使用First查询
+            Console.WriteLine("第一个元素：" + numbers.First());
+            Console.WriteLine("第一个元素：" + strings.First());
+            //带条件
+            Console.WriteLine("第一个偶数：" + numbers.First(i => i % 2 == 0));
+            //不满足或者为空
+            Console.WriteLine(emptyNumbers.FirstOrDefault());
+            Console.WriteLine(emptyNumbers.First());
         }
     }
     //需要一个继承IEqualityComparer接口的类，重写Equals方法和GetHashCode方法
